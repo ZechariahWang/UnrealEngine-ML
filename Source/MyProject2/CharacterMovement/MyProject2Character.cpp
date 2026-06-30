@@ -28,7 +28,7 @@ AMyProject2Character::AMyProject2Character()
 	Movement->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
 	Movement->JumpZVelocity = 700.f;
 	Movement->AirControl = 0.35f;
-	Movement->MaxWalkSpeed = 500.f;
+	Movement->MaxWalkSpeed = 3000.f;
 	Movement->MinAnalogWalkSpeed = 20.f;
 	Movement->BrakingDecelerationWalking = 2000.f;
 
