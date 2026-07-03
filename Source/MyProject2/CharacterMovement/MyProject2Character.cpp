@@ -9,6 +9,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Engine/Engine.h"
 
 DEFINE_LOG_CATEGORY(LogMyProject2Character);
 
@@ -86,10 +87,16 @@ void AMyProject2Character::Move(const FInputActionValue& Value) {
 void AMyProject2Character::Look(const FInputActionValue& Value) {
 	const FVector2D LookAxisVector = Value.Get<FVector2D>();
 
-	UE_LOG(LogMyProject2Character, Warning, TEXT("C++ Look() called: X=%f Y=%f"), LookAxisVector.X, LookAxisVector.Y);
+	if (GEngine) {
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green,
+			FString::Printf(TEXT("C++ Look() RUNNING kill me now  X=%.2f Y=%.2f"), LookAxisVector.X, LookAxisVector.Y));
+	}
 
 	if (Controller != nullptr) {
-		AddControllerYawInput(-LookAxisVector.X);
+		// Pitch must be negated but yaw must not: with bEnableLegacyInputScales the
+		// engine multiplies yaw input by +2.5 but pitch input by -2.5 (BaseGame.ini),
+		// so only the pitch axis arrives pre-inverted.
+		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(-LookAxisVector.Y);
 	}
 }
