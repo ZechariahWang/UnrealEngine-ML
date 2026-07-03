@@ -93,9 +93,6 @@ void AMyProject2Character::Look(const FInputActionValue& Value) {
 	}
 
 	if (Controller != nullptr) {
-		// Pitch must be negated but yaw must not: with bEnableLegacyInputScales the
-		// engine multiplies yaw input by +2.5 but pitch input by -2.5 (BaseGame.ini),
-		// so only the pitch axis arrives pre-inverted.
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(-LookAxisVector.Y);
 	}
