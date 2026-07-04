@@ -21,6 +21,9 @@ ABotCharacter::ABotCharacter() {
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
 
+	// u dont need a controller for the bot to move 
+	GetCharacterMovement()->bRunPhysicsWithNoController = true;
+
 	Health = CreateDefaultSubobject<UHealthComponent>(TEXT("Health"));
 	Gun = CreateDefaultSubobject<UGunComponent>(TEXT("Gun"));
 
@@ -50,13 +53,13 @@ void ABotCharacter::ApplyTeamColor() {
 	if (TeamId == 1) {
 		TeamColor = FLinearColor::Red;
 	}
-	// The mannequin material exposes a "Tint" vector parameter. Setting it on
-	// a material that lacks the parameter is harmless, so no need to check.
+
 	int32 MaterialCount = GetMesh()->GetNumMaterials();
 	for (int32 i = 0; i < MaterialCount; i++) {
 		UMaterialInstanceDynamic* DynamicMaterial = GetMesh()->CreateAndSetMaterialInstanceDynamic(i);
 		if (DynamicMaterial != nullptr) {
-			DynamicMaterial->SetVectorParameterValue(TEXT("Tint"), TeamColor);
+			DynamicMaterial->SetVectorParameterValue(TEXT("Paint Tint"), TeamColor);
+			DynamicMaterial->SetVectorParameterValue(TEXT("LogoTint"), TeamColor);
 		}
 	}
 }

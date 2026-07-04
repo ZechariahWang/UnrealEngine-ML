@@ -78,14 +78,15 @@ void ABattleManager::SpawnTeamLine(int32 TeamId) {
 		SpawnLocation.Y = SpawnLocation.Y - LineHalfLength + LineSpacing * i;
 		SpawnLocation.Z = SpawnLocation.Z + 96.0f; // capsule half height
 
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.SpawnCollisionHandlingOverride =
-			ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-
+		// Deferred spawn: TeamId must be set BEFORE BeginPlay runs, because BeginPlay applies the team color.
 		FRotator SpawnRotation(0.0f, FacingYaw, 0.0f);
-		ABotCharacter* Bot = World->SpawnActor<ABotCharacter>(BotClass, SpawnLocation, SpawnRotation, SpawnParams);
+		FTransform SpawnTransform(SpawnRotation, SpawnLocation);
+		ABotCharacter* Bot = World->SpawnActorDeferred<ABotCharacter>(
+			BotClass, SpawnTransform, nullptr, nullptr,
+			ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
 		if (Bot != nullptr) {
 			Bot->TeamId = TeamId;
+			Bot->FinishSpawning(SpawnTransform);
 			Bots.Add(Bot);
 		}
 	}
