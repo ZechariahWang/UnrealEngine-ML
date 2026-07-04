@@ -11,6 +11,7 @@ public class MyProject2 : ModuleRules
 		// Source is organised into subfolders; add them so headers can be included by bare name
 		// (V6 build settings disable the legacy recursive include paths).
 		PublicIncludePaths.Add(System.IO.Path.Combine(ModuleDirectory, "CharacterMovement"));
+		PublicIncludePaths.Add(System.IO.Path.Combine(ModuleDirectory, "Combat"));
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 

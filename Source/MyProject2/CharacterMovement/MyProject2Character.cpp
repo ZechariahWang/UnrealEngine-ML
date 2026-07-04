@@ -88,8 +88,7 @@ void AMyProject2Character::Look(const FInputActionValue& Value) {
 	const FVector2D LookAxisVector = Value.Get<FVector2D>();
 
 	if (GEngine) {
-		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green,
-			FString::Printf(TEXT("C++ Look() RUNNING kill me now  X=%.2f Y=%.2f"), LookAxisVector.X, LookAxisVector.Y));
+		GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Green, FString::Printf(TEXT("C++ Look() RUNNING kill me now  X=%.2f Y=%.2f"), LookAxisVector.X, LookAxisVector.Y));
 	}
 
 	if (Controller != nullptr) {
