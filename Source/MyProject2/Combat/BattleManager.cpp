@@ -19,9 +19,7 @@ void ABattleManager::Tick(float DeltaSeconds) {
 	// Counting down to the next round?
 	if (ResetTimer > 0.0f) {
 		ResetTimer = ResetTimer - DeltaSeconds;
-		if (ResetTimer <= 0.0f) {
-			StartRound();
-		}
+		if (ResetTimer <= 0.0f) { StartRound(); }
 		return;
 	}
 
@@ -31,18 +29,11 @@ void ABattleManager::Tick(float DeltaSeconds) {
 	if (BlueAlive > 0 && RedAlive > 0) { return; }
 
 	FString Message;
-	if (BlueAlive > 0) {
-		Message = FString::Printf(TEXT("Round %d: BLUE wins!"), RoundNumber);
-	}
-	else if (RedAlive > 0) {
-		Message = FString::Printf(TEXT("Round %d: RED wins!"), RoundNumber);
-	}
-	else {
-		Message = FString::Printf(TEXT("Round %d: mutual destruction!"), RoundNumber);
-	}
-	if (GEngine) {
-		GEngine->AddOnScreenDebugMessage(-1, RoundResetDelay, FColor::Yellow, Message);
-	}
+	if (BlueAlive > 0) { Message = FString::Printf(TEXT("Round %d: BLUE wins!"), RoundNumber); }
+	else if (RedAlive > 0) { Message = FString::Printf(TEXT("Round %d: RED wins!"), RoundNumber); }
+	else { Message = FString::Printf(TEXT("Round %d: mutual destruction!"), RoundNumber); }
+
+	if (GEngine) { GEngine->AddOnScreenDebugMessage(-1, RoundResetDelay, FColor::Yellow, Message);}
 	ResetTimer = RoundResetDelay;
 }
 
@@ -99,6 +90,7 @@ void ABattleManager::DestroyAllBots() {
 			Bot->Destroy();
 		}
 	}
+	
 	Bots.Empty();
 }
 
