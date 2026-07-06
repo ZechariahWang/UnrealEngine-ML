@@ -4,9 +4,6 @@
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
-/**
- * Simple health pool. Owners poll IsDead() — no delegates.
- */
 UCLASS(ClassGroup = (Combat), meta = (BlueprintSpawnableComponent))
 class MYPROJECT2_API UHealthComponent : public UActorComponent
 {

@@ -6,11 +6,6 @@
 
 class ABotCharacter;
 
-/**
- * Drop one of these into the level and press Play: it spawns two facing
- * lines of bots (blue vs red) centered on its own location, watches for a
- * team wipe, announces the winner, and resets the round.
- */
 UCLASS()
 class MYPROJECT2_API ABattleManager : public AActor
 {
@@ -19,23 +14,18 @@ class MYPROJECT2_API ABattleManager : public AActor
 public:
 	ABattleManager();
 
-	/** Bots per team. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Battle)
 	int32 TeamSize = 5;
 
-	/** Distance between the two team lines. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Battle)
 	float TeamSeparation = 3000.0f;
 
-	/** Spacing between bots within a line. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Battle)
 	float LineSpacing = 300.0f;
 
-	/** Seconds to wait after a wipe before the next round. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Battle)
 	float RoundResetDelay = 4.0f;
-
-	/** Bot class to spawn. Swap in a Blueprint subclass here later if wanted. */
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Battle)
 	TSubclassOf<ABotCharacter> BotClass;
 
